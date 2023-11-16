@@ -15,7 +15,7 @@ first_file = pd.read_excel('Attorney spreadsheet dcbar.xlsx')
 sec_file = pd.read_excel('Attorney spreadsheet mdcourts (1).xlsx')
 third_file = pd.read_excel('Attorney spreadsheet vsb.xlsx')
 fourth_file = pd.read_csv('result.csv')
-fourth_file.to_excel('result_converted.xlsx')
+fourth_file.to_excel('result_converted.xlsx', index=False)
 
 first_file = first_file.fillna('')
 sec_file = sec_file.fillna('')
