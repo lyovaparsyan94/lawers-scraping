@@ -1,0 +1,4 @@
+serp:
+  url: 'https://www.google.com/search?'
+  http_proxy: 'http://brd-customer-hl_23bd325f-zone-serp:834ucdyvfehn@brd.superproxy.io:22225'
+  https_proxy: 'http://brd-customer-hl_23bd325f-zone-serp:834ucdyvfehn@brd.superproxy.io:22225'

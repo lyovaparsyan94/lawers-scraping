@@ -1,2 +1,4 @@
 /file_merger
 /.idea
+configs/ca.crt
+__pycache__/

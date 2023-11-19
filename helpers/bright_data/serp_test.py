@@ -1,6 +1,6 @@
 import requests
 from pprint import pprint
-from config.constants import CERT_PATH
+from configs.constants import CERT_PATH
 
 proxies = {
     'http': 'http://brd-customer-hl_23bd325f-zone-serp:834ucdyvfehn@brd.superproxy.io:22225',
