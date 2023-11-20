@@ -23,4 +23,5 @@ class ChatGPT:
                 print(e)
                 retry -= 1
                 sleep(interval)
+                print(f"Retrying {5 - retry} time to run chatgpt  after {interval} seconds interval")
         return response
