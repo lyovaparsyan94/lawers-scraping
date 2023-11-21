@@ -1,5 +1,4 @@
-import random
-
+from random import choice
 from configs.constants import XLSX_FILE_PATH
 from helpers.file_handler import load_xlsx
 from src.scraper.datacollector import DataCollector
@@ -7,8 +6,7 @@ from src.google_search_api.google_search import GoogleSearch
 from src.chat_gpt.gpt_4 import ChatGPT
 from pprint import pprint
 
-from chat_gpt.fake_reponses import list_of_answers
-from random import choice
+from src.chat_gpt.fake_reponses import *
 
 
 class Manager:
@@ -35,7 +33,10 @@ class Manager:
                               f"I don't need any general number of {university}, please do not provide urls, provide " \
                               f"only personal information." \
                               f"Please provide a short response less than 300 letters / symbols"
-                    result = self.chat_gpt.run(content=content)
+                    # result = self.chat_gpt.run(content=content)
+
+                    # chatgpt answers imitation
+                    result = choice(list_of_answers)
                     self.data_collector.collect_data(person=person, data=result)
                     # TODO scrape result, save into list, after collecting all results, needed compare are results
                     #  and get duplicated emails and phone numbers
