@@ -1,8 +1,14 @@
+import random
+
 from configs.constants import XLSX_FILE_PATH
 from helpers.file_handler import load_xlsx
-
+from src.scraper.datacollector import DataCollector
 from src.google_search_api.google_search import GoogleSearch
 from src.chat_gpt.gpt_4 import ChatGPT
+from pprint import pprint
+
+from chat_gpt.fake_reponses import list_of_answers
+from random import choice
 
 
 class Manager:
@@ -11,6 +17,7 @@ class Manager:
         self.config = config
         self.search_api = GoogleSearch(config['serp'])
         self.chat_gpt = ChatGPT()
+        self.data_collector = DataCollector()
 
     def start(self):
         df = load_xlsx(file=XLSX_FILE_PATH)
@@ -18,6 +25,7 @@ class Manager:
             person, university = row[0], row[1]
             response = self.search_api.process(person=person, university=university)
             for info in response['organic']:
+                pprint(self.data_collector.all_data)
                 if 'linkedin' not in info['link']:
                     content = f"I need lawyer {person} phone number and email address from this link {info['link']}," \
                               f"if it's provided there. Provide information in this format: \n====\n " \
@@ -28,6 +36,6 @@ class Manager:
                               f"only personal information." \
                               f"Please provide a short response less than 300 letters / symbols"
                     result = self.chat_gpt.run(content=content)
+                    self.data_collector.collect_data(person=person, data=result)
                     # TODO scrape result, save into list, after collecting all results, needed compare are results
                     #  and get duplicated emails and phone numbers
-

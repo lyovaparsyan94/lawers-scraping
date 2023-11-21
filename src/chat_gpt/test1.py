@@ -1,12 +1,3 @@
-import g4f
-
-# g4f.debug.logging = True  # Enable logging
-# g4f.check_version = False  # Disable automatic version checking
-# print(g4f.version)  # Check version
-# print(g4f.Provider.Ails.params)  # Supported args
-
-# Automatic selection of provider
-# r = "Австралия является одной из самых развитых стран , будучи четырнадцатой по размеру экономикой в мире, и имеет девятое место в мире по ВВП в расчёте на душу населения. Военные расходы Австралии являются двенадцатыми по размеру в мире. С пятым по величине индексом человеческого развития Австралия занимает высокое место во многих сферах, таких как качество жизни, здоровье, образование, экономическая свобода, защита гражданских свобод и политических прав[14]. Австралия является членом G20, ОЭСР, ВТО, АТЭС, ООН, Содружества наций, АНЗЮСа, АУКУСа и Форума тихоокеанских островов."
 info = {
     "general": {
         "search_engine": "google",
@@ -154,30 +145,3 @@ info = {
         "next_page": 2
     },
 }
-
-
-# Streamed completion
-def ask(info):
-    response = g4f.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": f"find all links in {info} and give me in Python list"}],
-        stream=True,
-    )
-    # return str(response)
-    for message in response:
-        print(message, flush=True, end='')
-
-
-print(ask(info))
-# Normal response
-
-# def ask_gpt(promt: str) -> str:
-#     response = g4f.ChatCompletion.create(
-#         model=g4f.models.gpt_4,
-#         messages=[{"role": "user", "content": promt}],
-#     )
-#
-#     return response
-
-
-# print(ask_gpt(f"find all values from  : {r}"))
