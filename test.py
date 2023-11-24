@@ -1,3 +1,4 @@
+# test google response
 x = {'general': {'search_engine': 'google', 'results_cnt': 16200000, 'search_time': 0.55, 'language': 'en',
                  'mobile': False, 'basic_view': False, 'search_type': 'text',
                  'page_title': 'Ari E Craig The George Washington University contact info - Google Search',
@@ -73,6 +74,3 @@ x = {'general': {'search_engine': 'google', 'results_cnt': 16200000, 'search_tim
                     'next_page_link': 'https://www.google.com/search?q=Ari+E+Craig+The+George+Washington+University+contact+info&sca_esv=583796676&gl=us&hl=en&ei=gjdaZcqIGZiKi-gP196usA4&start=10&sa=N',
                     'next_page_start': 10, 'next_page': 2}}
 
-for info in x['organic']:
-    if 'linkedin' not in info['link']:
-        print(info['link'])

@@ -19,8 +19,7 @@ class GoogleSearch:
 
     def search(self, query):
         url = f'{self.base_url}{query}'
-        return x
-        # return requests.get(url=url, proxies=self.proxies, verify=CERT_PATH)
+        return requests.get(url=url, proxies=self.proxies, verify=CERT_PATH)
 
     @staticmethod
     def create_query(person, university):

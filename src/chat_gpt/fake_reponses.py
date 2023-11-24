@@ -1,15 +1,13 @@
 # Use fake answers to avoid waiting for answers from CHATGPT on testing staging
 response_no_data = """
-[1]: https://bulletin.gwu.edu/faculty/ ""
+[1]: https://bulletin.gwu.edu/faculty/2787631 ""
 [2]: https://bulletin.gwu.edu/faculty//faculty.pdf ""
 [3]: https://bulletin.gwu.edu/faculty/faculty.pdf ""
 
 I searched the link you provided for lawyer Ari E Craig, but I could not find any phone number or email address for him. It seems that the link only lists the faculty members of The George Washington University, and Ari E Craig is not among them. Maybe you can try to contact him through other sources, such as social media or online directories. I hope this helps.
+https://bulletin.gwu.edu/faculty/2787631 
 
-====
-
-phone_numbers = []
-email_addresses = []"""
+"""
 response_with_data1 = """
 [1]: https://bulletin.gwu.edu/ ""
 [2]: https://www.gwu.edu/faculty-staff ""
@@ -19,7 +17,7 @@ I searched the link you provided and found the following information for lawyer 
 
 ====
 phone_numbers = [202-994-2160]
-email_addresses = [aecraig@gwu.edu]
+email_addresses = [aecraig@gwu.edu, aecraig@gwu.edu]
 ====
 
 I hope this helps you. 😊"""

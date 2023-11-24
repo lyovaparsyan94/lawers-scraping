@@ -2,3 +2,6 @@
 /.idea
 configs/ca.crt
 __pycache__/
+/serp_data
+/data/result_filtered_alphabetically.xlsx
+lawyers_phone_emails_file.xlsx
