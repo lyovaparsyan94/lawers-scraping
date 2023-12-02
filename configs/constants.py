@@ -8,6 +8,6 @@ LOGGING_CONFIG_PATH = join(CONFIGS_DIR, 'logger.yaml')
 
 # SERP API
 CERT_PATH = join(CONFIGS_DIR, 'ca.crt')
-XLSX_FILE_PATH = join(ROOT_DIR, join('data', 'result_filtered_alphabetically.xlsx'))
+XLSX_FILE_PATH = join(ROOT_DIR, join('data', 'Not_GW_lawyers.xlsx'))
 
 SERP_DATA_PATH = join(ROOT_DIR, 'serp_data')

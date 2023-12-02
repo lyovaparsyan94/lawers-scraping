@@ -5,7 +5,7 @@ from src.google_search_api.google_search import GoogleSearch
 from src.chat_gpt.gpt_4 import ChatGPT
 from src.chat_gpt.fake_reponses import list_of_answers
 from random import choice
-
+from time import sleep
 
 class Manager:
 
@@ -24,8 +24,11 @@ class Manager:
                 json_response = load_json(filename=filename)
             else:
                 response = self.search_api.process(person=person, university=university)
-                json_response = response.json()
-                write_serp_json(filename=filename, data=json_response)
+                if response:
+                    json_response = response.json()
+                else:
+                    ...
+            write_serp_json(filename=filename, data=json_response)
             person_info = {}
             if json_response.get('organic') is not None:
                 for info in json_response['organic']:
@@ -46,9 +49,8 @@ class Manager:
                                   f"Please provide a short response less than 300 letters / symbols"
                         result = self.chat_gpt.run(content=content)
                         # result = choice(list_of_answers)
-
                         data = self.data_collector.collect_data(person=person, data=result)
                         person_info[person]['phone'].update(data[person]['phone'])
                         person_info[person]['email'].update(data[person]['email'])
-                print(f"Write {person} info into xlsx\n{person_info}")
+                print(f"Writing {person} info into xlsx\n{person_info}")
                 write_to_xlsx(data_to_write=person_info)

@@ -46,7 +46,22 @@ class DataCollector:
                 for index, element in enumerate(info):
                     cleaned_list.append(element.strip(' '))
             cleaned_list = list(set(cleaned_list))
+            cleaned_list = self.remove_odd_symbols(cleaned_list)
+
         return cleaned_list
+
+    def remove_odd_symbols(self, cleaned_list):
+        smb_lst = ['x', 'X', '*', '..']
+        new_lst = []
+        for el in cleaned_list:
+            if el and type(el) is str:
+                for smb in smb_lst:
+                    if smb in el:
+                        break
+                else:
+                    el = el.replace('.', '-')
+                    new_lst.append(el)
+        return new_lst
 
     def regex_check(self, data, patterns):
         if type(data) == list:
