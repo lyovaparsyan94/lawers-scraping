@@ -1,5 +1,4 @@
 import re
-
 from src.chat_gpt.fake_reponses import list_of_answers
 from random import choice
 
@@ -22,6 +21,7 @@ class DataCollector:
         emails = self.extract_data(data, start_marker=self.email_start_marker)
         emails = self.regex_check(data=emails, patterns=self.email_regex)
         phone_numbers = self.extract_data(data, start_marker=self.phone_start_marker)
+        phone_numbers = self.remove_odd_symbols(phone_numbers)
         # phone_numbers = self.regex_check(data=phone_numbers, patterns=self.phone_regex)
         data = {person: {'email': set(emails), 'phone': set(phone_numbers)}}
         # if DataCollector.all_data.get(person) is None:
@@ -31,6 +31,7 @@ class DataCollector:
         #     DataCollector.all_data[person]['phone'].extend(phone_numbers)
         #     DataCollector.all_data[person]['email'] = list(set(DataCollector.all_data[person]['email']))
         #     DataCollector.all_data[person]['phone'] = list(set(DataCollector.all_data[person]['phone']))
+        print(f'Found data: {data}')
         return data
 
     def extract_data(self, data, start_marker):
@@ -46,22 +47,22 @@ class DataCollector:
                 for index, element in enumerate(info):
                     cleaned_list.append(element.strip(' '))
             cleaned_list = list(set(cleaned_list))
-            cleaned_list = self.remove_odd_symbols(cleaned_list)
+            # cleaned_list = self.remove_odd_symbols(cleaned_list)
 
         return cleaned_list
 
     def remove_odd_symbols(self, cleaned_list):
-        smb_lst = ['x', 'X', '*', '..']
-        new_lst = []
-        for el in cleaned_list:
-            if el and type(el) is str:
-                for smb in smb_lst:
-                    if smb in el:
+        symbols_list = ['x', 'X', '*', '..']
+        result_list = []
+        for element in cleaned_list:
+            if element and type(element) is str:
+                for symbol in symbols_list:
+                    if symbol in element:
                         break
                 else:
-                    el = el.replace('.', '-')
-                    new_lst.append(el)
-        return new_lst
+                    element = element.replace('.', '-')
+                    result_list.append(element)
+        return result_list
 
     def regex_check(self, data, patterns):
         if type(data) == list:

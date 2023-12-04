@@ -11,7 +11,8 @@ class ChatGPT:
     @staticmethod
     def process(content: str):
         response = g4f.ChatCompletion.create(
-            model=g4f.models.gpt_4_0613,
+            model=g4f.models.gpt_4,
+            # provider=g4f.Provider.Bing,
             messages=[{"role": "user", "content": content}],
         )
         return response

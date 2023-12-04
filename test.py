@@ -73,4 +73,3 @@ x = {'general': {'search_engine': 'google', 'results_cnt': 16200000, 'search_tim
      'pagination': {'current_page': 1,
                     'next_page_link': 'https://www.google.com/search?q=Ari+E+Craig+The+George+Washington+University+contact+info&sca_esv=583796676&gl=us&hl=en&ei=gjdaZcqIGZiKi-gP196usA4&start=10&sa=N',
                     'next_page_start': 10, 'next_page': 2}}
-

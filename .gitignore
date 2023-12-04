@@ -3,5 +3,7 @@
 configs/ca.crt
 __pycache__/
 /serp_data
-/data/result_filtered_alphabetically.xlsx
-/data/Not_GW_lawyers(reserv).xlsx
+#/data/result_filtered_alphabetically.xlsx
+#/data/Not_GW_lawyers(reserv).xlsx
+data
+configs/config.yaml

@@ -1,11 +1,12 @@
-from configs.constants import XLSX_FILE_PATH
-from helpers.file_handler import load_xlsx, write_to_xlsx, write_serp_json, check_existence, load_json
+from configs.constants import XLSX_FILE_PATH, UNFILLED_LAWYERS_PATH
+from helpers.file_handler import load_xlsx, write_to_xlsx, write_serp_json, check_existence, load_json,save_unfilled_data, remove_from_unfilled_data
 from src.scraper.datacollector import DataCollector
 from src.google_search_api.google_search import GoogleSearch
 from src.chat_gpt.gpt_4 import ChatGPT
 from src.chat_gpt.fake_reponses import list_of_answers
 from random import choice
 from time import sleep
+
 
 class Manager:
 
@@ -21,14 +22,17 @@ class Manager:
             person, university = row[0], row[1]
             filename = f'{person.replace(" ", "_")}'
             if check_existence(filename=filename):
+                """check file existence in serp json files, if doesn't exist, only then make serp request"""
                 json_response = load_json(filename=filename)
             else:
                 response = self.search_api.process(person=person, university=university)
                 if response:
                     json_response = response.json()
+                    write_serp_json(filename=filename, data=json_response)
                 else:
-                    ...
-            write_serp_json(filename=filename, data=json_response)
+                    """write data with no response in json to handle if it will need and go to the next person"""
+                    save_unfilled_data(person, university, filename=UNFILLED_LAWYERS_PATH)
+                    continue
             person_info = {}
             if json_response.get('organic') is not None:
                 for info in json_response['organic']:
@@ -47,6 +51,7 @@ class Manager:
                                   f"I don't need any general number of {university}, please do not provide urls, provide " \
                                   f"only personal information." \
                                   f"Please provide a short response less than 300 letters / symbols"
+                        print(f'Searching at url {info["link"]}')
                         result = self.chat_gpt.run(content=content)
                         # result = choice(list_of_answers)
                         data = self.data_collector.collect_data(person=person, data=result)

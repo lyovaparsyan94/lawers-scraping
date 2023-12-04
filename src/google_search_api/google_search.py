@@ -20,7 +20,8 @@ class GoogleSearch:
         while not response and retry >= 1:
             try:
                 query = self.create_query(person=person, university=university)
-                return self.search(query=query)
+                response = self.search(query=query)
+                return response
             except ProxyError as e:
                 print(e)
                 retry -= 1
@@ -30,6 +31,8 @@ class GoogleSearch:
                 retry -= 1
                 sleep(interval)
                 print(f"Retrying after PRoxyError {5 - retry} time")
+        print(f'Bad response from SERP for {person} - \nsaved info for further handling')
+        return response
 
     def search(self, query):
         url = f'{self.base_url}{query}'
